@@ -16,6 +16,9 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <title>Gustoro Coffee Shop</title>
 
     <style>
@@ -34,6 +37,10 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
 
     form .input {
         padding: 10px;
+    }
+
+    ul {
+        list-style-type: none;
     }
     </style>
 
@@ -93,7 +100,6 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
                                     <a href="delete-category.php?id_jenis=<?php echo $jenis['id_jenis']; ?>"
                                         style="color:black; margin-left:30px;">x</a>
                                 </div>
-
                             </li>
                             <?php } ?>
                         </ul>
@@ -105,20 +111,7 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
                     <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#tambah-product">Tambah
                         Product</a>
                 </div>
-                <?php
 
-                while ($jenis_product = mysqli_fetch_array($query)) {
-                ?>
-                <ul id="<?php echo $jenis_product['id_jenis'] ?>">
-                    <?php echo $jenis_product['nama_jenis'] ?>
-                    <li>
-
-                    </li>
-                </ul>
-
-
-                <?php } ?>
-                <!---->
                 <div>
                     <?php
                     if (isset($_GET['message'])) {
@@ -131,38 +124,38 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
                     ?>
                 </div>
                 <ul>
+                    <?php
+                    $sql_product = "SELECT * FROM product";
+                    $query_product = mysqli_query($connect, $sql_product) or die(mysqli_error($connect));
+                    while ($list_product = mysqli_fetch_array($query_product)) {
+                    ?>
                     <li>
+
                         <div class="product">
-                            <?php
-                            $sql_product = "SELECT * FROM product";
-                            $query_product = mysqli_query($connect, $sql_product) or die(mysqli_error($connect));
-                            while ($list_product = mysqli_fetch_array($query_product)) {
-                            ?>
-                            <div class="product">
-                                <div class="container-image">
-                                    <img src="gambar-product/<?php echo $list_product['gambar']; ?>">
-                                </div>
-                                <div class="description">
-                                    <h3><?php echo $list_product['nama_product']; ?></h3>
-                                    <h5> <?php echo $list_product['harga']; ?></h5>
-                                    <h5> <?php echo $list_product['jumlah_tersedia']; ?></h5>
-                                </div>
+                            <div class="container-image">
+                                <img src="gambar-product/<?php echo $list_product['gambar']; ?>">
+                            </div>
+                            <div class="description d-flex flex-column">
+                                <h3> Nama : <?php echo $list_product['nama_product']; ?></h3>
+                                <h5> Harga : <?php echo $list_product['harga']; ?></h5>
+                                <h5> Jumlah :<?php echo $list_product['jumlah_tersedia']; ?></h5>
+                                <h5> <?php echo $list_product['gambar']; ?></h5>
                                 <div>
-                                    <div>
+                                    <div class="d-inline">
                                         <a href="#?id_product=<?php echo $list_product['id_product']; ?>"
                                             class="btn btn-info" data-toggle="modal" data-target="#edit-product">Edit
                                             Product</a>
-                                    </div>
-                                    <div>
+
                                         <a href="delete-product.php?id_product=<?php echo $list_product['id_product']; ?>"
                                             class="btn btn-warning">Delete</a>
+
                                     </div>
                                 </div>
                             </div>
-                            <?php } ?>
-
                         </div>
                     </li>
+                    <?php } ?>
+
                 </ul>
             </div>
         </div>

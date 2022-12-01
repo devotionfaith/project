@@ -49,7 +49,7 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
                         <a href="products.php" class="nav-link" aria-current="page">PRODUCTS</a>
                     </li>
                     <li class="nav-item">
-                        <a href="order.php" class="nav-link" aria-current="page">ORDER</a>
+                        <a href="lihatorder.php" class="nav-link" aria-current="page">LIHAT ORDER</a>
                     </li>
                     <li class="nav-item">
                         <a href="reservasi.php" class="nav-link" aria-current="page">RESERVASI</a>
@@ -116,7 +116,7 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
                                     <h3>NAMA : <?php echo $list_product['nama_product']; ?></h3>
                                     <h5>HARGA : <?php echo $list_product['harga']; ?></h5>
                                     <h5>Jumlah Tersedia : <?php echo $list_product['jumlah_tersedia']; ?></h5>
-                                    <a href="p-order.php?id=<?php echo $list_product['id_product']; ?>"
+                                    <a href="order.php?id=<?php echo $list_product['id_product']; ?>"
                                         class="btn btn-info">Order</a>
                                 </div>
                             </div>

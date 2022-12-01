@@ -20,6 +20,7 @@ if ($cek > 0) {
 
     if ($role == 'admin') {
         header("location: admin/homepage-admin.php");
+        $_SESSION['role'] = 'admin';
     } else if ($role == 'user') {
         if ($value == 0) {
             header("location: home.php");

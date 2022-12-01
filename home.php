@@ -3,9 +3,11 @@ session_start();
 if (empty($_SESSION['username'])) {
     $url = "login.php?value=1";
     $url2 = "login.php?value=2";
+    $url3 = "login.php?value=3";
 } else {
     $url = "order.php?value=0";
     $url2 = "reservasi.php?value=0";
+    $url3 = "products.php?value=0";
 } ?>
 
 
@@ -49,7 +51,7 @@ if (empty($_SESSION['username'])) {
                         <a href="#slide3" class="nav-link" aria-current="page">PRODUCTS</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#slide4" class="nav-link" aria-current="page">ORDER</a>
+                        <a href="#slide4" class="nav-link" aria-current="page">LIHAT ORDER</a>
                     </li>
                     <li class="nav-item">
                         <a href="#slide5" class="nav-link" aria-current="page">RESERVASI</a>
@@ -144,7 +146,7 @@ if (empty($_SESSION['username'])) {
                         <h2 class="mb-4 ">OUR PRODUCT</h2>
                         <p>Dari minunan tradisional berbasis espresso sampai berbagai minuman
                             racikan kopi terkini.</p>
-                        <a class="btn button-profile mt-3 text-uppercase" href="products.php"><span>Product</span></a>
+                        <a class="btn button-profile mt-3 text-uppercase" href="<?= $url3 ?>"><span>Product</span></a>
                     </div>
                 </div>
             </div>

@@ -34,7 +34,7 @@ include 'sessions.php';
                         <a href="products.php" class="nav-link" aria-current="page">PRODUCTS</a>
                     </li>
                     <li class="nav-item">
-                        <a href="order.php" class="nav-link" aria-current="page">ORDER</a>
+                        <a href="lihatorder.php" class="nav-link" aria-current="page">LIHAT ORDER</a>
                     </li>
                     <li class="nav-item">
                         <a href="reservasi.php" class="nav-link" aria-current="page">RESERVASI</a>
