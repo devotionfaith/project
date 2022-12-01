@@ -5,6 +5,16 @@ if (empty($_SESSION['username'])) {
     $url3 = "login.php?value=3";
 }
 
+if (isset($_GET['message'])) {
+    if ($_GET['message'] == "gagal") {
+        $alert = "ORDER GAGAL";
+    } elseif ($_GET['message'] == "Produk_Tidak_Cukup") {
+        $alert = "!!!! PRODUK TIDAK MENCUKUPI !!!!";
+    }
+} else {
+    $alert = " ";
+}
+
 include 'koneksi.php';
 $sql = "SELECT * FROM jenis_product";
 $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
@@ -74,8 +84,9 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
                         class="text-warning text-center text-xl-center d-flex flex-column align-items-center justify-content-center">
                         <h1 class="display-2 fw-bolder mb-1 ">Our Products</h1>
                         <h5 class="lead fw-normal mb-3">Tell us what do you want</h5>
-                        <a class="btn" href="#list-coffee"> <button class="button-profile">Lihat Produk
-                            </button></a>
+                        <p style="color : red"> <?php
+                                                echo $alert;
+                                                ?> </p>
                     </div>
                 </div>
                 <div class="col-6 col-xl-4 col-xxl-5 text-center">
@@ -89,8 +100,8 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
     <section id="section2">
         <div class="row">
             <div class="col-3 container-category">
-                <div class="container mx-1 category">
-                    <h2 class="mb-3">Categories</h2>
+                <div class="container mx-1 mt-1 category">
+                    <h2 class="mb-2">Categories</h2>
                     <ul>
                         <?php
                         while ($jenis = mysqli_fetch_array($query)) {
@@ -107,29 +118,42 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
 
                 <ul>
                     <?php
-                    $sql_product = "SELECT * FROM product";
+                    $sql_product = "SELECT * FROM jenis_product";
                     $query_product = mysqli_query($connect, $sql_product) or die(mysqli_error($connect));
+
                     while ($list_product = mysqli_fetch_array($query_product)) {
                     ?>
-                    <div id="<?php echo $jenis['id_jenis']; ?>" class="pt-5">
-                        <li>
-                            <div class="product">
-                                <div class="container-image  img-hover-zoom--blur">
-                                    <img src="admin/gambar-product/<?php echo $list_product['gambar']; ?>">
-                                </div>
-                                <div class="description">
-                                    <h3>NAMA : <?php echo $list_product['nama_product']; ?></h3>
-                                    <h5>HARGA : <?php echo $list_product['harga']; ?></h5>
-                                    <h5>HARGA : <?php echo $list_product['gambar']; ?></h5>
-                                    <h5>Jumlah Tersedia : <?php echo $list_product['jumlah_tersedia']; ?></h5>
-                                    <a href="order.php?id=<?php echo $list_product['id_product']; ?>"
-                                        class="btn btn-info">Order</a>
-                                </div>
-                            </div>
-                        </li>
+                    <div id="<?php echo $list_product['id_jenis']; ?>">
+                        <h2 class="pt-5"> <br>
+                            <?php echo $list_product['nama_jenis'] ?></h2>
+
                     </div>
+
+                    <li>
+                        <?php
+                            $id_jenis = $list_product['id_jenis'];
+                            $sql_product2 = "SELECT * FROM product WHERE id_jenis= $id_jenis";
+                            $query_product2 = mysqli_query($connect, $sql_product2) or die(mysqli_error($connect));
+                            while ($list =  mysqli_fetch_array($query_product2)) {
+                            ?>
+
+                        <div class="product mt-5">
+                            <div class="container-image">
+                                <img src="admin/gambar-product/<?php echo $list['gambar']; ?>">
+                            </div>
+                            <div class="description d-flex flex-column">
+                                <h3> Nama : <?php echo $list['nama_product']; ?></h3>
+                                <h5> Harga : <?php echo $list['harga']; ?></h5>
+                                <h5> Jumlah :<?php echo $list['jumlah_tersedia']; ?></h5>
+                                <a href="order.php?id=<?php echo $list['id_product']; ?>" class="btn btn-info"
+                                    style="width:100px">Order</a>
+                            </div>
+                        </div>
+                    </li>
+                    <?php } ?>
+                    <?php } ?>
+
                 </ul>
-                <?php } ?>
             </div>
         </div>
     </section>
