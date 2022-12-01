@@ -27,6 +27,11 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
     <link rel="stylesheet" href="css/styles.css" />
     <title>Gustoro Coffee Shop</title>
 </head>
+<style>
+.container-product ul {
+    list-style-type: none;
+}
+</style>
 
 <body>
     <nav class="nav nav-bg navbar-expand-lg fixed-top navbar-dark p-3">
@@ -99,30 +104,31 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
             </div>
             <div class="col-md-9 container-product bg-light">
 
-                <?php
-                $sql_product = "SELECT * FROM product";
-                $query_product = mysqli_query($connect, $sql_product) or die(mysqli_error($connect));
-                while ($list_product = mysqli_fetch_array($query_product)) {
-                ?>
 
-                <div id="<?php echo $jenis['id_jenis']; ?>" class="pt-5">
-                    <ul>
+                <ul>
+                    <?php
+                    $sql_product = "SELECT * FROM product";
+                    $query_product = mysqli_query($connect, $sql_product) or die(mysqli_error($connect));
+                    while ($list_product = mysqli_fetch_array($query_product)) {
+                    ?>
+                    <div id="<?php echo $jenis['id_jenis']; ?>" class="pt-5">
                         <li>
                             <div class="product">
                                 <div class="container-image  img-hover-zoom--blur">
-                                    <img src="gambar-product/<?php echo $list_product['gambar']; ?>">
+                                    <img src="admin/gambar-product/<?php echo $list_product['gambar']; ?>">
                                 </div>
                                 <div class="description">
                                     <h3>NAMA : <?php echo $list_product['nama_product']; ?></h3>
                                     <h5>HARGA : <?php echo $list_product['harga']; ?></h5>
+                                    <h5>HARGA : <?php echo $list_product['gambar']; ?></h5>
                                     <h5>Jumlah Tersedia : <?php echo $list_product['jumlah_tersedia']; ?></h5>
                                     <a href="order.php?id=<?php echo $list_product['id_product']; ?>"
                                         class="btn btn-info">Order</a>
                                 </div>
                             </div>
                         </li>
-                    </ul>
-                </div>
+                    </div>
+                </ul>
                 <?php } ?>
             </div>
         </div>

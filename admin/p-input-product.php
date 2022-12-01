@@ -16,11 +16,7 @@ if (move_uploaded_file($_FILES['gambar_product']['tmp_name'], $target_file)) {
     echo "Sorry, there was an error uploading your file.";
 }
 
-if (eregi('.jpg' . $_FILES["gambar_product"]["tmp_name"])) {
-    imagepng(imagecreatefromjpeg($_FILES["gambar_product"]["tmp_name"]) . 'gambar-poduct/' . $_FILES["gambar_product"]["name"]);
-}
-
-$image = basename($_FILES["gambar_product"]["name"] + ".jpg");
+$image = basename($_FILES["gambar_product"]["name"]);
 $sql = "INSERT INTO product VALUES('', '$nama_product', '$harga_product', '$jenis_product', '$jumlah_tersedia', '$image')";
 $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
 

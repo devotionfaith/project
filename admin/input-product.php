@@ -95,8 +95,7 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
                             ?>
                             <li>
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <a
-                                        href="#<?php echo $jenis['nama_jenis']; ?>"><?php echo $jenis['nama_jenis'] ?></a>
+                                    <a href="#<?php echo $jenis['id_jenis']; ?>"><?php echo $jenis['nama_jenis'] ?></a>
                                     <a href="delete-category.php?id_jenis=<?php echo $jenis['id_jenis']; ?>"
                                         style="color:black; margin-left:30px;">x</a>
                                 </div>
@@ -125,35 +124,44 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
                 </div>
                 <ul>
                     <?php
-                    $sql_product = "SELECT * FROM product";
+                    $sql_product = "SELECT * FROM jenis_product";
                     $query_product = mysqli_query($connect, $sql_product) or die(mysqli_error($connect));
+
                     while ($list_product = mysqli_fetch_array($query_product)) {
                     ?>
+                    <h2><?php echo $list_product['nama_jenis'] ?></h2>
                     <li>
+                        <?php
+                            $id_jenis = $list_product['id_jenis'];
+                            $sql_product2 = "SELECT * FROM product WHERE id_jenis= $id_jenis";
+                            $query_product2 = mysqli_query($connect, $sql_product2) or die(mysqli_error($connect));
+                            while ($list =  mysqli_fetch_array($query_product2)) {
+                            ?>
 
-                        <div class="product">
+                        <div class="product" id="<?php echo $list['id_jenis']; ?>">
                             <div class="container-image">
-                                <img src="gambar-product/<?php echo $list_product['gambar']; ?>">
+                                <img src="gambar-product/<?php echo $list['gambar']; ?>">
                             </div>
                             <div class="description d-flex flex-column">
-                                <h3> Nama : <?php echo $list_product['nama_product']; ?></h3>
-                                <h5> Harga : <?php echo $list_product['harga']; ?></h5>
-                                <h5> Jumlah :<?php echo $list_product['jumlah_tersedia']; ?></h5>
-                                <h5> <?php echo $list_product['gambar']; ?></h5>
+                                <h3> Nama : <?php echo $list['nama_product']; ?></h3>
+                                <h5> Harga : <?php echo $list['harga']; ?></h5>
+                                <h5> Harga : <?php echo $list['id_jenis']; ?></h5>
+                                <h5> Jumlah :<?php echo $list['jumlah_tersedia']; ?></h5>
+                                <h5> <?php echo $list['gambar']; ?></h5>
                                 <div>
                                     <div class="d-inline">
-                                        <a href="#?id_product=<?php echo $list_product['id_product']; ?>"
-                                            class="btn btn-info" data-toggle="modal" data-target="#edit-product">Edit
+                                        <a href="edit-product.php?id_product=<?php echo $list['id_product']; ?>"
+                                            class="btn btn-info">Edit
                                             Product</a>
 
-                                        <a href="delete-product.php?id_product=<?php echo $list_product['id_product']; ?>"
+                                        <a href="delete-product.php?id_product=<?php echo $list['id_product']; ?>"
                                             class="btn btn-warning">Delete</a>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </li>
+                    <?php } ?>
                     <?php } ?>
 
                 </ul>
@@ -207,7 +215,7 @@ $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
                             </div>
                             <div class="input">
                                 <input type="submit" class="btn btn-warning" value="Tambah">
-                                <input type="button" class="btn btn-warning" value="Close">
+                                <input type="button" class="btn btn-warning" data-dismiss="modal" value="Close">
                             </div>
 
                         </div>

@@ -1,9 +1,6 @@
 <?php
 include 'koneksi.php';
 include 'sessions.php';
-
-$id_product = $_GET['id']
-
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +51,7 @@ $id_product = $_GET['id']
                     <h2 class="pb-3">DAFTAR ORDER</h2>
                     <table class="table table-bordered table-dark">
                         <tr>
-                            <td>No.</td>
+                            <td>No ID</td>
                             <td>Nama</td>
                             <td>Product</td>
                             <td>Quantity</td>
@@ -63,10 +60,20 @@ $id_product = $_GET['id']
                         </tr>
 
                         <?php
-                        $sql = "SELECT * FROM order_list INNER JOIN user ON order_list.id_user = user.id_user";
+                        $username = $_SESSION['username'];
+                        $sql_id = "SELECT * FROM user WHERE username = '$username'";
+                        $query_id = mysqli_query($connect, $sql_id);
+                        $data_id = mysqli_fetch_array($query_id);
+                        $id = $data_id['id_user'];
+                        $sql = "SELECT * FROM order_list INNER JOIN user ON order_list.id_user = user.id_user where order_list.id_user=$id";
                         $query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
 
-                        while ($data = mysqli_fetch_array($query)) { ?>
+                        $cek = mysqli_num_rows($query);
+
+                        if ($cek == 0) {
+                            echo "TIDAK ADA ORDER YANG PERNAH DILAKUKAN";
+                        } else {
+                            while ($data = mysqli_fetch_array($query)) { ?>
                         <tr>
                             <td><?= $data['id_order']; ?></td>
                             <td><?= $data['nama']; ?></td>
@@ -76,6 +83,7 @@ $id_product = $_GET['id']
                             <td><?= $data['jenis_pembayaran']; ?></td>
                         </tr>
 
+                        <?php } ?>
                         <?php } ?>
                     </table>
                 </div>

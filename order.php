@@ -33,7 +33,7 @@ $id_product = $_GET['id']
                     <div class="col-6 col-lg-5 col-xl-5 col-xxl-4">
                         <div class="order-box">
                             <form action="p-order.php" method="POST">
-                                <div class="text-warning p-2 rounded-4">
+                                <div class="text-warning text-center p-2 rounded-4">
                                     <h2>Order</h2>
                                     <hr class=" text-light">
                                 </div>
@@ -65,7 +65,7 @@ $id_product = $_GET['id']
                                         <input type="text" name="nama_product" class="form-control" id="nama-product"
                                             value="<?php echo $data_product['nama_product']; ?>" readonly>
                                     </div>
-                                    <div class="d-flex flex-row justify-content-around ">
+                                    <div class="d-flex flex-row justify-content-between">
 
                                         <div class="user-box mb-2">
                                             <label for="alamat" class="form-label">Alamat Pengiriman</label>

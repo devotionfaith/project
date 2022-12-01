@@ -5,7 +5,7 @@ if (empty($_SESSION['username'])) {
     $url2 = "login.php?value=2";
     $url3 = "login.php?value=3";
 } else {
-    $url = "order.php?value=0";
+    $url = "lihatorder.php?value=0";
     $url2 = "reservasi.php?value=0";
     $url3 = "products.php?value=0";
 } ?>
@@ -159,11 +159,12 @@ if (empty($_SESSION['username'])) {
                 <!-- Column -->
                 <div class="col-lg-7 d-flex justify-content-center align-items-center">
                     <div class="text-box ">
-                        <h1> ORDER </h1>
-                        <h6 class="mt-3"> Malas Ngantri? <br> Bisa loh order secara Online <br> Klik tombol di bawah
-                            untuk memesan</h6>
+                        <h1> LIHAT ORDER </h1>
+                        <h6 class="mt-3"> Ayo lihat orderanmu sekarang juga <br> Pengen lihat orderanmu kan? <br> Klik
+                            tombol di bawah
+                            untuk melihat</h6>
 
-                        <a class="btn btn-dark mt-3 text-uppercase" href="<?= $url ?>"><span>Order</span></a>
+                        <a class="btn btn-dark mt-3 text-uppercase" href="<?= $url ?>"><span>Lihat Order</span></a>
                     </div>
                 </div>
                 <div class="col-lg-5 pr-4">
